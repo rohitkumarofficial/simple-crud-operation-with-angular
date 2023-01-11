@@ -1,0 +1,36 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-12 mb-3 flex-row justify-end">
+      <button
+        type="button"
+        class="btn btn-outline-primary"
+        [routerLink]="['/home']"
+      >
+        Back
+      </button>
+    </div>
+    <div class="col-12">
+      <table class="table table-bordered" *ngIf="userInfo$ | async as user">
+        <tbody>
+          <tr>
+            <th scope="col">Username</th>
+            <td>{{ user?.username }}</td>
+          </tr>
+          <tr>
+            <th scope="col">First Name</th>
+            <td>{{ user?.name?.firstname }}</td>
+          </tr>
+          <tr>
+            <th scope="col">Last Name</th>
+            <td>{{ user?.name?.lastname }}</td>
+          </tr>
+          <tr>
+            <th scope="col">Phone</th>
+            <td>{{ user?.phone }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <p *ngIf="!(userInfo$ | async)">No Result found</p>
+    </div>
+  </div>
+</div>

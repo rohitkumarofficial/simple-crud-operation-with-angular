@@ -1,0 +1,37 @@
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12 mb-3 flex-row justify-end">
+            <button type="button" class="btn btn-outline-primary" [routerLink]="['/user/create']" >Add New User</button>
+        </div>
+      <div class="col-12">
+        <table class="table table-bordered"  *ngIf="!(isLoading$ | async); else loading">
+          <thead>
+            <tr>
+              <th scope="col">Username</th>
+              <th scope="col">First Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">Phone</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of users$ | async">
+              <td>{{user?.username}}</td>
+              <td>{{user?.name?.firstname}}</td>
+              <td>{{user?.name?.lastname}}</td>
+              <td>{{user?.phone}}</td>
+              <td [width]="270">
+                <div class="flex-row gap-2">
+                    <button type="button" class="btn btn-outline-primary" [routerLink]="['/user/detail/', user?.id]" >View Detail</button>
+                    <button type="button" class="btn btn-outline-success" [routerLink]="['/user-profile/', user?.id]">Edit</button>
+                  <button type="button" class="btn btn-outline-danger"  (click)="deleteAcc(user!.id)">Delete</button>
+                   </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <ng-template #loading>
+          <p class="align-center">Loading...</p>
+        </ng-template>
+      </div>
+    </div>
+  </div>

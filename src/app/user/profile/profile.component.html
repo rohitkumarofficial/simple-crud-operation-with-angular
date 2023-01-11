@@ -1,0 +1,107 @@
+<div class="container mt-5 pb-5">
+    <ng-container *ngIf="userInfo$ | async; else notFound">
+        <form class="user-form flex-column align-center" [formGroup]="userForm">
+            <div class="flex-row gap-2">
+                <div class="mb-3 form-field">
+                  <label for="firstName" class="form-label">First Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="firstName"
+                    formControlName="firstName"
+                    (keydown.space)="$event.preventDefault()"
+                    autocomplete="off"
+                    [class.is-invalid]="userForm.get('firstName')?.touched && userForm.get('firstName')?.errors"
+                  />
+                  <div
+                    class="invalid-feedback d-block"
+                    *ngIf="userForm.get('firstName')?.touched && userForm.get('firstName')?.errors"
+                  >
+                    <ul>
+                      <li *ngIf="userForm.get('firstName')?.errors?.['required']">
+                        First name is required
+                      </li>
+                      <li *ngIf="userForm.get('firstName')?.errors?.['minlength']">
+                        First name must be greater than 2 characters
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="mb-3 form-field">
+                    <label for="lastName" class="form-label">Last Name</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="lastName"
+                      formControlName="lastName"
+                      (keydown.space)="$event.preventDefault()"
+                      autocomplete="off"
+                      [class.is-invalid]="userForm.get('lastName')?.touched && userForm.get('lastName')?.errors"
+                    />
+                    <div
+                      class="invalid-feedback d-block"
+                      *ngIf="userForm.get('lastName')?.touched && userForm.get('lastName')?.errors"
+                    >
+                      <ul>
+                        <li *ngIf="userForm.get('lastName')?.errors?.['required']">
+                          Last name is required
+                        </li>
+                        <li *ngIf="userForm.get('lastName')?.errors?.['minlength']">
+                          Last name must be greater than 2 characters
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+              </div>
+          
+              <div class="flex-row">
+                <div class="mb-3 form-field">
+                  <label for="phone" class="form-label">Phone Number</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="phone"
+                    formControlName="phone"
+                    autocomplete="off"
+                    [class.is-invalid]="userForm.get('phone')?.touched && userForm.get('phone')?.errors"
+                  />
+                  <div
+                    class="invalid-feedback d-block"
+                    *ngIf="userForm.get('phone')?.touched && userForm.get('phone')?.errors"
+                  >
+                    <ul>
+                      <li *ngIf="userForm.get('phone')?.errors?.['pattern']">
+                        Please enter 10 digit phone number
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+          
+          
+            <div class="flex-row justify-end pb-3 gap-2">
+                <button
+                type="button"
+                class="btn btn-outline-danger"
+                color="accent"
+                (click)="deleteAcc()"
+              >
+                Delete
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                color="accent"
+                (click)="update()"
+                [disabled]="userForm.invalid"
+              >
+                Update
+              </button>
+            </div>
+          </form>
+    </ng-container>
+    <ng-template #notFound>
+        <p class="info"> Loading...</p>
+    </ng-template>
+      
+</div>

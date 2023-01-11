@@ -1,0 +1,120 @@
+<div class="container mt-5 pb-5">
+    <form class="create-form flex-column align-center" [formGroup]="createUserForm">
+        <div class="flex-row">
+          <div class="mb-3 form-field">
+            <label for="username" class="form-label">User Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="username"
+              formControlName="username"
+              (keydown.space)="$event.preventDefault()"
+              autocomplete="off"
+              [class.is-invalid]="createUserForm.get('username')?.touched && createUserForm.get('username')?.errors"
+            />
+            <div
+              class="invalid-feedback d-block"
+              *ngIf="createUserForm.get('username')?.touched && createUserForm.get('username')?.errors"
+            >
+              <ul>
+                <li *ngIf="createUserForm.get('username')?.errors?.['required']">
+                  User name is required
+                </li>
+                <li *ngIf="createUserForm.get('username')?.errors?.['minlength']">
+                  User name must be greater than 2 characters
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex-row  gap-2">
+            <div class="mb-3 form-field">
+              <label for="firstName" class="form-label">First Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="firstName"
+                formControlName="firstName"
+                (keydown.space)="$event.preventDefault()"
+                autocomplete="off"
+                [class.is-invalid]="createUserForm.get('firstName')?.touched && createUserForm.get('firstName')?.errors"
+              />
+              <div
+                class="invalid-feedback d-block"
+                *ngIf="createUserForm.get('firstName')?.touched && createUserForm.get('firstName')?.errors"
+              >
+                <ul>
+                  <li *ngIf="createUserForm.get('firstName')?.errors?.['required']">
+                    First name is required
+                  </li>
+                  <li *ngIf="createUserForm.get('firstName')?.errors?.['minlength']">
+                    First name must be greater than 2 characters
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="mb-3 form-field">
+                <label for="lastName" class="form-label">Last Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="lastName"
+                  formControlName="lastName"
+                  (keydown.space)="$event.preventDefault()"
+                  autocomplete="off"
+                  [class.is-invalid]="createUserForm.get('lastName')?.touched && createUserForm.get('lastName')?.errors"
+                />
+                <div
+                  class="invalid-feedback d-block"
+                  *ngIf="createUserForm.get('lastName')?.touched && createUserForm.get('lastName')?.errors"
+                >
+                  <ul>
+                    <li *ngIf="createUserForm.get('lastName')?.errors?.['required']">
+                      Last name is required
+                    </li>
+                    <li *ngIf="createUserForm.get('lastName')?.errors?.['minlength']">
+                      Last name must be greater than 5 characters
+                    </li>
+                  </ul>
+                </div>
+              </div>
+          </div>
+          <div class="flex-row">
+            <div class="mb-3 form-field">
+              <label for="phone" class="form-label">Phone Number</label>
+              <input
+                type="number"
+                class="form-control"
+                id="phone"
+                formControlName="phone"
+                autocomplete="off"
+                [class.is-invalid]="createUserForm.get('phone')?.touched && createUserForm.get('phone')?.errors"
+              />
+              <div
+                class="invalid-feedback d-block"
+                *ngIf="createUserForm.get('phone')?.touched && createUserForm.get('phone')?.errors"
+              >
+                <ul>
+                  <li *ngIf="createUserForm.get('phone')?.errors?.['pattern']">
+                    Please enter 10 digit phone number
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+      
+        <div class="flex-row justify-end pb-3">
+          <button
+            type="button"
+            class="btn btn-primary"
+            color="accent"
+            (click)="create()"
+            [disabled]="createUserForm.invalid"
+          >
+           Create
+          </button>
+        </div>
+      </form>
+      
+</div>
